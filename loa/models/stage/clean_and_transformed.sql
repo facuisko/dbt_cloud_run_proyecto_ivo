@@ -30,7 +30,7 @@
     'dbt_cpc_tbl_credito_dia' as MDM_ProcessNew,
     periodo_dia	
 
-    from {{source('transformation_stage','tbl_credito_dia')}}  --source stage
+    from {{source('data_us','tbl_credito_dia')}}  --source stage
 
     where periodo_dia='{{var("periodo")}}'              --partition load
     

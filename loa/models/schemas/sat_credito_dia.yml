@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: sat_credito_dia
+    description: "Descripción de la tabla"
+    columns:
+      - name: credit_num_credito_fc
+        description: "Es primary key de la tabla"
+        tests:
+          - unique
+          - not_null
+        meta: {"metadato1":"valor1", "metadato2":"valor2"}

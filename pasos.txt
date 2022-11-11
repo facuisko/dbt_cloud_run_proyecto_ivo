@@ -1,0 +1,36 @@
+PASO A PASITO PARA CREAR UN PROYECTO EN DBT CONECTADO A BIGQUERY
+
+1. Instalo Python 
+2. Instalo VirtualEnv
+3. Genero un entorno virutal instalo alli dentro: dbt-core y dbt-bigquery + las librerías que quiera onda jupyter, etc. 
+3bis. Salgo de esa ruta y me paro en el path donde voy a trabajar. 
+4. Instalo Google Cloud Shell SDK (la CLI) (en Windows uso GUI)-. 
+5. Creo proyecto en GCP (por ahora a mano desde la consola de GCP). 
+6. Habilito API en GCP (por ahora a mano desde la consola de GCP)
+6 bis. Genero credenciales y descargo json y lo guardo en la carpeta '.dbt' que se genera en la instalación 
+7. Estando en el proyecto GCP creo Datasets y Tablas (las tablas pueden ser públicas o se pueden tomar de otras fuentes 
+en mi caso subí archivos)
+8. Desde la SDK hago 'gcloud init' para que me loguee a la cuenta/proyecto correspondiente
+9. Creo un repo vacío en Github (Bitbucket para la proxima). 
+10. Instalo Git Bash (puedo instalarlo a mano o desde Visual Studio). 
+10 bis. Colocar git en el Path de las variables de entorno de Windows
+11. Clono repo a local
+12. voy a la terminal cmd, activo el entorno virtual de py y en el path del repo hago 'dbt init [NOMBRE dbt-project]'. 
+Este paso me creará un archivo profiles.yml dentro de la carpeta .dbt
+13. Configuro los requerimientos: 
+  Elijo bigquery / Método de autenticación elijo service_account / keyfile: \Users\<name>\.dbt\your-key.json
+  proyecto: arquetipos-bcodechile /  dataset: nombre del dataset creado en el paso 7 / threads: 3
+  job_execution_timeout_seconds: 300 / location: US
+14. El paso anterior escribe:
+a) un archivo 'profiles.yml' que se encuentra en la carpeta dbt. 
+b) una carpeta que va con el nombre del proyecto dbt y se crea dentro del repo. 
+c) un archivo dbt_proyect.yml que tiene especificaciones sobre schemas, modelos, etc. del proyecto. 
+d) varias carpetas referidas a modelos donde se guardarán archivos sql
+15. Para ver que todo lo que hice está ok, me paro dentro de la carpeta del proyecto creado y hago 'dbt debug'. 
+Esto correrá un programita que testeará si toda la configuración del entrno ha sido la correcta para empezar a trabajar. 
+15. Ahora hay que actualizar repo: algunos comandos para ello podrían ser...  
+git add .
+git commit -m "sarasas"
+git push
+16. 
+ 

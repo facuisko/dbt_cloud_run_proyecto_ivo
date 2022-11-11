@@ -1,0 +1,10 @@
+
+version: 2
+
+sources:
+  - name: transformation_stage # required
+    description: Capa Stage
+    tables:
+      - name: tbl_credito_dia #required
+     # - name: tbl_fgl_contabilidad_sld_mes #required
+            

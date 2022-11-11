@@ -11,7 +11,7 @@ WITH regla_1 as(
     '1' as dq_error_code,	
     'El Numero de Operacion FC no esta informado o largo no valido' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where LENGTH(credit_num_credito_fc) = 0
     and periodo_dia='{{var("periodo")}}'
 
@@ -27,7 +27,7 @@ WITH regla_1 as(
     '2' as dq_error_code,	
     'El Numero Operación alternativo no esta informado' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where credit_num_credito_alter = ''
     and periodo_dia='{{var("periodo")}}'
 
@@ -43,7 +43,7 @@ WITH regla_1 as(
     '3' as dq_error_code,	
     'El rut titular no esta informado' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where nullif(credit_num_rut_titular,'') IS NULL
     and periodo_dia='{{var("periodo")}}'
 
@@ -61,7 +61,7 @@ WITH regla_1 as(
     '4' as dq_error_code,	
     'La categoría crédito no esta informada' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where nullif(credit_fec_inicio_operacion,'') IS NULL
     and periodo_dia='{{var("periodo")}}'
 
@@ -77,7 +77,7 @@ WITH regla_1 as(
     '5' as dq_error_code,	
     'La fecha de inicio de operación no es menor a la fecha de término de operación' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where safe_cast(credit_fec_fin_operacion as DATE format 'DD/MM/YYYY') <= safe_cast(credit_fec_inicio_operacion as DATE format 'DD/MM/YYYY')
 
     and periodo_dia='{{var("periodo")}}'
@@ -94,7 +94,7 @@ WITH regla_1 as(
     '6' as dq_error_code,	
     'La Fecha de Término Operación no esta informada' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where nullif(credit_fec_fin_operacion,'') IS NULL
     and periodo_dia='{{var("periodo")}}'
 
@@ -110,7 +110,7 @@ WITH regla_1 as(
     '7' as dq_error_code,	
     'La fecha de termino de operación no es mayor a la fecha de inicio de operación' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where safe_cast(credit_fec_fin_operacion as DATE format 'DD/MM/YYYY') <= safe_cast(credit_fec_inicio_operacion as DATE format 'DD/MM/YYYY')
     and periodo_dia='{{var("periodo")}}'
 
@@ -127,7 +127,7 @@ WITH regla_1 as(
     '8' as dq_error_code,	
     'El Tipo de Moneda no esta informado' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where credit_cod_mda_swf = ''
     and periodo_dia='{{var("periodo")}}'
 
@@ -144,7 +144,7 @@ WITH regla_1 as(
     '9' as dq_error_code,	
     'El Monto Bruto no esta informado' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where nullif(credit_mon_bruto_mnd_origen,'') IS NULL
     and periodo_dia='{{var("periodo")}}'
 
@@ -160,7 +160,7 @@ WITH regla_1 as(
     '10' as dq_error_code,	
     'El Estado Operación no esta informado' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where credit_est_credito_fc = ''
     and periodo_dia='{{var("periodo")}}'
 
@@ -177,7 +177,7 @@ WITH regla_1 as(
     '11' as dq_error_code,	
     'La categoría crédito no esta informada' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where credit_cod_categoria = ''
     and periodo_dia='{{var("periodo")}}'
 
@@ -193,7 +193,7 @@ WITH regla_1 as(
     '12' as dq_error_code,	
     'La categoría crédito no esta entre los siguientes rangos: CRE, CRP, CRD, LOA, 007, 019, 006' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where credit_cod_categoria NOT IN ('CRE', 'CRP', 'CRD', 'LOA', '007', '019', '006')
     and periodo_dia='{{var("periodo")}}'
 
@@ -209,7 +209,7 @@ WITH regla_1 as(
     '13' as dq_error_code,	
     'El plazo contable no esta informado' as dq_error_descripcion,
     stage_table.*
-    from {{source('data_us','tbl_credito_dia')}} stage_table
+    from {{source('transformation_stage','tbl_credito_dia')}} stage_table
     where nullif(credit_plazo_contable,'') IS NULL
     and periodo_dia='{{var("periodo")}}'
 
@@ -225,7 +225,7 @@ WITH regla_1 as(
         '14' as dq_error_code,	
         'El plazo contable no esta entre los siguientes rangos: 3 o 4' as dq_error_descripcion,
         stage_table.*
-        from {{source('data_us','tbl_credito_dia')}} stage_table
+        from {{source('transformation_stage','tbl_credito_dia')}} stage_table
         where credit_plazo_contable NOT IN ('3', '4')
         and periodo_dia='{{var("periodo")}}' 
     ),
@@ -240,7 +240,7 @@ WITH regla_1 as(
         '15' as dq_error_code,	
         'El Tipo Operación esta no informado' as dq_error_descripcion,
         stage_table.*
-        from {{source('data_us','tbl_credito_dia')}} stage_table
+        from {{source('transformation_stage','tbl_credito_dia')}} stage_table
         where nullif(credit_tipo_operacion_fc,'') IS NULL
         and periodo_dia='{{var("periodo")}}' 
     ),
@@ -254,7 +254,7 @@ WITH regla_1 as(
         '16' as dq_error_code,	
         'La Cantidad Cuotas Pactadas capital no esta informada' as dq_error_descripcion,
         stage_table.*
-        from {{source('data_us','tbl_credito_dia')}} stage_table
+        from {{source('transformation_stage','tbl_credito_dia')}} stage_table
         where nullif(credit_num_cuota_pactada_cap,'') IS NULL
         and periodo_dia='{{var("periodo")}}' 
     ),
@@ -268,7 +268,7 @@ WITH regla_1 as(
         '17' as dq_error_code,	
         'La Cantidad Cuotas Pactadas capital no es mayor o igual 1' as dq_error_descripcion,
         stage_table.*
-        from {{source('data_us','tbl_credito_dia')}} stage_table
+        from {{source('transformation_stage','tbl_credito_dia')}} stage_table
         where {{as_integer('credit_num_cuota_pactada_cap')}} < 1
         and periodo_dia='{{var("periodo")}}' 
     ),
@@ -283,7 +283,7 @@ WITH regla_1 as(
         '18' as dq_error_code,	
         'El Saldo Actual Moneda Origen no esta informado' as dq_error_descripcion,
         stage_table.*
-        from {{source('data_us','tbl_credito_dia')}} stage_table
+        from {{source('transformation_stage','tbl_credito_dia')}} stage_table
         where nullif(credit_mon_actual_mnd_origen,'') IS NULL
         and periodo_dia='{{var("periodo")}}' 
     ),
@@ -298,7 +298,7 @@ WITH regla_1 as(
         '19' as dq_error_code,	
         'El estado operación FC no esta informado' as dq_error_descripcion,
         stage_table.*
-        from {{source('data_us','tbl_credito_dia')}} stage_table
+        from {{source('transformation_stage','tbl_credito_dia')}} stage_table
         where nullif(credit_est_credito_cdr,'') IS NULL
         and periodo_dia='{{var("periodo")}}' 
     )

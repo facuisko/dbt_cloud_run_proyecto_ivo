@@ -8,7 +8,7 @@ empleo_proj2:
       location: us-east4
       method: oauth
       priority: interactive
-      project: 	cobalt-particle-361019
+      project: 	dogwood-reserve-362512
       threads: 3
       type: bigquery
   target: dev
@@ -22,7 +22,7 @@ loa:
       location: us-east4
       method: service-account
       priority: interactive
-      project: cobalt-particle-361019
+      project: dogwood-reserve-362512
       threads: 3
       type: bigquery
   target: dev
